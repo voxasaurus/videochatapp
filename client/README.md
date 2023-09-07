@@ -1,0 +1,1 @@
+This is a simple app that allows you to watch online videos with friends.
