@@ -31,45 +31,49 @@ mongoose.connect('mongodb://localhost:27017/videochatapp', {
 });
 
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    // Check if user already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Username is already taken' });
+    const { username, password } = req.body;
+    try {
+      // Check if user already exists
+      const existingUser = await User.findOne({ username });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Username is already taken' });
+      }
+      
+      // Hash the password and create a new user
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const colorClass = `color${Math.floor(Math.random() * 10)}`;
+      const newUser = new User({ username, password: hashedPassword, colorClass });
+      await newUser.save();
+  
+      res.json({ message: 'User registered successfully', colorClass });
+    } catch (error) {
+      res.status(500).json({ message: 'An error occurred', error });
     }
-    
-    // Hash the password and create a new user
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword });
-    await newUser.save();
+  });
+  
 
-    res.json({ message: 'User registered successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'An error occurred', error });
-  }
-});
-
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    // Find the user by username
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid username or password' });
+  app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+      // Find the user by username
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(400).json({ message: 'Invalid username or password' });
+      }
+  
+      // Check the password
+      const validPassword = await bcrypt.compare(password, user.password);
+      if (!validPassword) {
+        return res.status(400).json({ message: 'Invalid username or password' });
+      }
+  
+      res.json({ message: 'Logged in successfully', colorClass: user.colorClass });
+    } catch (error) {
+      res.status(500).json({ message: 'An error occurred', error });
     }
+  });
+  
 
-    // Check the password
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(400).json({ message: 'Invalid username or password' });
-    }
-
-    res.json({ message: 'Logged in successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'An error occurred', error });
-  }
-});
 
 io.on('connection', (socket) => {
   console.log('A user connected');

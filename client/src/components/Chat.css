@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 .chat-container {
     display: flex;
     height: 100vh;
@@ -5,18 +9,24 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-  }
-  
-  .video-player {
+    background: linear-gradient(to right, #b3cde0, #6497b1);
+
+}
+
+.video-player {
     width: 80%;
+    max-width: 80%;
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-  }
-  
-  .youtube-container {
+    justify-content: space-between;
+    font-family: 'Lato', sans-serif;
+
+}
+
+.youtube-container {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -25,110 +35,129 @@
     border: 2px solid #ccc;
     border-radius: 10px;
     position: relative;
-    padding-top: 46.25%; /* 16:9 Aspect Ratio */
-    height: 0; /* Collapse container to 0 height; padding-top gives it height */
-  }
-  
-  .youtube-container iframe {
+    padding-top: 46.25%;
+    height: 0;
+}
+
+.youtube-container iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-  }
-  
-  
-  .video-url-input {
+}
+
+.video-url-input {
+    display: flex;
+    align-items: center; /* Align items to the center */
+    height: 60px; /* Set a fixed height */
     margin-top: 10px;
-  }
-  
-  .video-url-input input {
-    width: calc(100% - 20px);
+}
+
+.video-url-input input {
+    flex: 1;
     padding: 10px;
     border-radius: 5px;
-    margin: 10px 0;
     border: 1px solid #ccc;
-  }
-  
-  .video-url-input button {
-    padding: 10px 20px;
+}
+
+.video-url-input button {
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-left: 10px;
     cursor: pointer;
-  }
-  
-  .video-url-input button:hover {
+}
+
+.video-url-input button:hover {
     background-color: #f0f0f0;
-  }
-  
-  .chat-section {
-    width: 25%;
+}
+
+.chat-section {
+    width: 20%;
+    max-width: 20%;
     display: flex;
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
-  }
-  
-  /* ... (the remaining CSS remains the same) */
-  
-    
-  
-  .chat-messages {
+    height: 100%;
+    justify-content: space-between;
+}
+
+.chat-messages {
     flex: 1;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.7);
     overflow-y: auto;
-  }
-  
-  .chat-message {
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.chat-message {
     padding: 10px;
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
-  }
-  
-  .chat-message b {
+}
+
+.chat-message b {
     display: block;
     margin-bottom: 5px;
-  }
-  
-  .chat-input {
-    width: calc(100% - 20px);
+}
+
+.chat-input {
+    display: flex;
+    align-items: center; /* Align items to the center */
+
     padding: 10px;
     border-radius: 5px;
-    margin: 10px 0;
     border: 1px solid #ccc;
-  }
-  
-  .chat-send-button {
-    padding: 10px 20px;
+    margin-top: 10px; /* Added top margin to ensure it doesn't stick to the above element */
+}
+
+.chat-send-button {
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     cursor: pointer;
-  }
-  
-  .chat-send-button:hover {
     background-color: #f0f0f0;
-  }
-  
-  .video-player input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border-radius: 5px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-  }
-  
-  .video-player button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  
-  .video-player button:hover {
-    background-color: #f0f0f0;
-  }
-  
+    margin-left: 10px; /* Added a margin to the left to separate it from the input field */
+}
+
+.chat-send-button:hover {
+    background-color: #e0e0e0;
+}
+
+.day .chat-container {
+    background-image: linear-gradient(to bottom right, #E0F7FA, #B2EBF2);
+}
+.night .chat-container {
+    background-image: linear-gradient(to bottom right, #37474F, #263238);
+}
+
+.day .chat-message.test1 {
+    background-color: #ccffd5;
+}
+.night .chat-message.test1 {
+    background-color: #005927;
+}
+.day .chat-message.test2 {
+    background-color: #cce7ff;
+}
+.night .chat-message.test2 {
+    background-color: #002f5f;
+}
+
+.color0 { background-color: rgba(240, 163, 255, 0.2); }
+.color1 { background-color: rgba(0, 117, 220, 0.2); }
+.color2 { background-color: rgba(153, 63, 0, 0.2); }
+.color3 { background-color: rgba(76, 0, 92, 0.2); }
+.color4 { background-color: rgba(25, 25, 25, 0.2); }
+.color5 { background-color: rgba(0, 92, 49, 0.2); }
+.color6 { background-color: rgba(43, 206, 72, 0.2); }
+.color7 { background-color: rgba(255, 204, 153, 0.2); }
+.color8 { background-color: rgba(128, 128, 128, 0.2); }
+.color9 { background-color: rgba(148, 255, 181, 0.2); }

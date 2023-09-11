@@ -1,54 +1,67 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import UserContext from '../UserContext'; 
+import ThemeContext from '../ThemeContext'; 
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   
-  const { user, setUser } = useContext(UserContext);  
+  const { user, setUser } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);  
 
   const login = async () => {
     try {
       const res = await axios.post('http://localhost:5000/login', { username, password });
       setMessage(res.data.message);
-        
-      // If login is successful, update the user context with the username
+      
       if (res.data.message === "Logged in successfully") {
         const userData = { username };
-        setUser(userData);  // Set the username in the user context
-        localStorage.setItem('user', JSON.stringify(userData));  // Store user data in localStorage
+        setUser(userData);  
+        localStorage.setItem('user', JSON.stringify(userData));  
       }
     } catch (error) {
-      setMessage(error.response?.data?.message || "An error occurred");  // Handle potential undefined values gracefully
+      setMessage(error.response?.data?.message || "An error occurred");  
     }
   };
 
+  const themeStyles = {
+    color: theme === 'day' ? '#000' : '#c0c0c0',
+    background: 'linear-gradient(to right, #b3cde0, #6497b1)',
+    borderRadius: '15px',
+    padding: '3px',
+    transition: 'all 0.5s',
+  };
+
+  const inputButtonStyles = {
+    color: theme === 'day' ? '#000' : '#c0c0c0',
+    backgroundColor: theme === 'day' ? '#fff' : '#2f2f2f',
+    transition: 'all 0.5s',
+  };
+
   return (
-    <div>
-      <h2>Login to Chat and Post Videos</h2>
-      {user ? (
-        <p>{message}</p>
-      ) : (
-        <>
-          <input 
-            type="text" 
-            placeholder="Username" 
-            value={username}
-            onChange={(e) => setUsername(e.target.value)} 
-          />
-          <input 
-            type="password" 
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} 
-          />
-          <button onClick={login}>Login</button>
-          <p>{message}</p>
-        </>
-      )}
-    </div>
+    user ? null : (
+      <div style={themeStyles}>
+        <h4 style={{ marginBottom: '4px' }}>Login to Chat and Post Videos</h4>
+        <input 
+          type="text" 
+          placeholder="Username" 
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} 
+          style={{ ...inputButtonStyles, marginBottom: '8px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+        />
+        <input 
+          type="password" 
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+          style={{ ...inputButtonStyles, marginBottom: '8px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+        />
+        <button onClick={login} style={{ ...inputButtonStyles, padding: '10px 20px', borderRadius: '4px', border: '1px solid #ccc', cursor: 'pointer' }}>Login</button>
+        <p style={{ marginTop: '4px' }}>{message}</p>
+      </div>
+    )
   );
 }
 
