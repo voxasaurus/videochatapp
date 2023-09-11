@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import io from 'socket.io-client';
 import UserContext from '../UserContext';
 import YouTube from 'react-youtube';
@@ -12,6 +12,7 @@ function Chat() {
   const [youtubeURL, setYoutubeURL] = useState('');
   const [videoID, setVideoID] = useState('M7lc1UVf-VE');
   const { user } = useContext(UserContext);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     socket = io('http://localhost:5000');
@@ -26,13 +27,19 @@ function Chat() {
 
     socket.on('change_video', (videoID) => {
       setVideoID(videoID);
-      setYoutubeURL(''); // Clear the YouTube URL input field
+      setYoutubeURL('');
     });
 
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chat]);
 
   const sendMessage = () => {
     if (message && user) {
@@ -52,7 +59,7 @@ function Chat() {
     try {
       const videoID = new URL(youtubeURL).searchParams.get('v');
       setVideoID(videoID);
-      socket.emit('change_video', videoID); // Send the new video ID to the server
+      socket.emit('change_video', videoID);
     } catch (e) {
       console.error('Invalid YouTube URL');
     }
@@ -96,6 +103,7 @@ function Chat() {
               <p>{msg.message}</p>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
         <input
           type="text"
