@@ -10,8 +10,8 @@ const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-      origin: FRONTEND_ORIGIN,
-      methods: ["GET", "POST"]
+      origin: ['https://videochatapp-re9k.vercel.app'],
+      methods: ["GET", "POST", "PUT", "DELETE"],
     }
   });
 
@@ -19,7 +19,7 @@ const ChatMessage = require('./models/ChatMessage');
 const User = require('./models/User');
 
 app.use(cors({
-    origin: ['https://videoplay-chat-app-38f126c44487.herokuapp.com/'],
+    origin: ['https://videochatapp-re9k.vercel.app'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }));
