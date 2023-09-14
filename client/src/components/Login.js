@@ -17,7 +17,7 @@ function Login({ setIsLoginModalOpen }) {
 
   const login = async () => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/login`, credentials, { withCredentials: true });
+        const res = await axios.post('https://videochatapp-re9k.vercel.app/login', { username, password });
       setMessage(res.data.message);
       
       if (res.data.message === "Logged in successfully") {
