@@ -109,23 +109,29 @@
 }
 
 .chat-input {
-    display: flex;
-    align-items: center; /* Align items to the center */
-
+    flex-grow: 1;
+    border-radius: 15px;
     padding: 10px;
-    border-radius: 5px;
     border: 1px solid #ccc;
-    margin-top: 10px; /* Added top margin to ensure it doesn't stick to the above element */
-}
+  }
+
+  .chat-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 
 .chat-send-button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    background-color: #008cba;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
     cursor: pointer;
-    background-color: #f0f0f0;
-    margin-left: 10px; /* Added a margin to the left to separate it from the input field */
-}
+    font-size: 0.875rem;
+  }
 
 .chat-send-button:hover {
     background-color: #e0e0e0;

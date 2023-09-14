@@ -91,19 +91,21 @@ function Chat() {
           ))}
           <div ref={messagesEndRef} />
         </div>
-        <input
-          type="text"
-          className="chat-input"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
-        />
-        <button className="chat-send-button" onClick={sendMessage}>
-          Send
-        </button>
+        <div className="chat-input-container">
+          <input
+            type="text"
+            className="chat-input"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <button className="chat-send-button" onClick={sendMessage}>
+            Send
+          </button>
+        </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default Chat;

@@ -6,10 +6,10 @@ import Chat from './components/Chat';
 import UserContext from './UserContext';  
 import ThemeContext from './ThemeContext'; 
 
-
 function App() {
   const [user, setUser] = useState(null);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -33,10 +33,15 @@ function App() {
       left: '50%',
       right: 'auto',
       bottom: 'auto',
+      marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       width: '400px',
-      height: '300px',
-      backgroundColor: theme === 'day' ? 'rgba(230, 230, 250, 1)' : 'rgba(69, 69, 69, 1)',
+      height: '350px',
+      background: 'linear-gradient(to right, #1e3c72, #2a5298)',
+      borderRadius: '15px',
+      border: 'none',
+      color: '#fff',
+      padding: '20px',
     },
   };
 
@@ -48,9 +53,15 @@ function App() {
         color: theme === 'day' ? '#000' : '#c0c0c0',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', alignItems: 'center' }}>
-          <Login />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="logo.png" alt="Site logo" style={{ width: '75px', marginRight: '10px' }} />
+            <h1 style={{ fontSize: '1.5rem', color: 'white' }}>Chill Chat</h1>
+          </div>
           {!user ? (
-            <button onClick={() => setIsRegisterModalOpen(true)} style={{ padding: '5px 20px', cursor: 'pointer', fontSize: '1rem', borderRadius: '4px' }}>Register</button>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <button onClick={() => setIsLoginModalOpen(true)} style={{ padding: '5px 20px', cursor: 'pointer', fontSize: '1rem', borderRadius: '4px', marginRight: '10px' }}>Login</button>
+              <button onClick={() => setIsRegisterModalOpen(true)} style={{ padding: '5px 20px', cursor: 'pointer', fontSize: '1rem', borderRadius: '4px' }}>Register</button>
+            </div>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '10px' }}>Logged in as: {user.username}</span>
@@ -58,7 +69,14 @@ function App() {
             </div>
           )}
         </div>
-
+        <Modal
+          isOpen={isLoginModalOpen}
+          onRequestClose={() => setIsLoginModalOpen(false)}
+          contentLabel="Login Modal"
+          style={customStyles}
+        >
+          <Login setIsLoginModalOpen={setIsLoginModalOpen} />
+        </Modal>
         <Modal
           isOpen={isRegisterModalOpen}
           onRequestClose={() => setIsRegisterModalOpen(false)}
@@ -66,7 +84,7 @@ function App() {
           style={customStyles}
         >
           <Register />
-          <button onClick={() => setIsRegisterModalOpen(false)} style={{ padding: '10px 20px', cursor: 'pointer', marginTop: '20px' }}>Close</button>
+          <button onClick={() => setIsRegisterModalOpen(false)} style={{ padding: '10px 20px', cursor: 'pointer', marginTop: '20px', borderRadius: '12px', border: 'none', background: '#fff' }}>Close</button>
         </Modal>
         
         <Chat /> 

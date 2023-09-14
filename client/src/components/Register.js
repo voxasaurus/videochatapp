@@ -14,7 +14,7 @@ function Register() {
       const res = await axios.post('http://localhost:5000/register', { username, password });
       setMessage(res.data.message);
     } catch (error) {
-      setMessage(error.response?.data?.message || "An error occurred");  // Handle potential undefined values gracefully
+      setMessage(error.response?.data?.message || "An error occurred");  
     }
   };
 
@@ -25,23 +25,25 @@ function Register() {
   };
 
   return (
-    <div style={themeStyles}>
-      <h2 style={{ marginBottom: '16px' }}>Register</h2>
-      <input 
-        type="text" 
-        placeholder="Username" 
-        value={username}
-        onChange={(e) => setUsername(e.target.value)} 
-        style={{ ...themeStyles, marginBottom: '8px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-      />
-      <input 
-        type="password" 
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)} 
-        style={{ ...themeStyles, marginBottom: '8px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-      />
-      <button onClick={register} style={{ ...themeStyles, padding: '10px 20px', borderRadius: '4px', border: '1px solid #ccc', cursor: 'pointer' }}>Register</button>
+    <div style={{...themeStyles, background: 'linear-gradient(to right, #1e3c72, #2a5298)', borderRadius: '15px', padding: '20px'}}>
+      <h2 style={{ marginBottom: '16px', color: 'white' }}>Register</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <input 
+          type="text" 
+          placeholder="Username" 
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} 
+          style={{ ...themeStyles, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+        />
+        <input 
+          type="password" 
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+          style={{ ...themeStyles, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+        />
+        <button onClick={register} style={{ ...themeStyles, padding: '10px 20px', borderRadius: '4px', border: '1px solid #ccc', cursor: 'pointer', backgroundColor: '#ffae19' }}>Register</button>
+      </div>
       <p style={{ marginTop: '16px' }}>{message}</p>
     </div>
   );
