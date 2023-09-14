@@ -17,7 +17,7 @@ function Login({ setIsLoginModalOpen }) {
 
   const login = async () => {
     try {
-      const res = await axios.post('https://videochatapp-re9k.vercel.app/api/login', credentials, { withCredentials: true });
+      const res = await axios.post('https://videoplay-chat-app-38f126c44487.herokuapp.com/login', credentials, { withCredentials: true });
       setMessage(res.data.message);
       
       if (res.data.message === "Logged in successfully") {

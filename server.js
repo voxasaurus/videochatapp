@@ -19,7 +19,7 @@ const ChatMessage = require('./models/ChatMessage');
 const User = require('./models/User');
 
 app.use(cors({
-    origin: ['https://videochatapp-re9k.vercel.app'],
+    origin: ['https://videoplay-chat-app-38f126c44487.herokuapp.com/'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }));
