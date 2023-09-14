@@ -11,13 +11,12 @@ function Register() {
 
   const register = async () => {
     try {
-      const res = await axios.post('https://videochatapp-re9k.vercel.app/register', { username, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/register`, { username, password });
       setMessage(res.data.message);
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred");  
     }
   };
-
   const themeStyles = {
     color: theme === 'day' ? '#000' : '#c0c0c0',
     backgroundColor: theme === 'day' ? '#fff' : '#2f2f2f',
