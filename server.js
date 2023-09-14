@@ -20,7 +20,7 @@ const User = require('./models/User');
 
 app.use(cors({
     origin: ['https://videochatapp-re9k.vercel.app'],
-    methods: ["GET", "POST", "PUT", "DELETE"], // Add all the HTTP methods you want to allow
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }));
 
