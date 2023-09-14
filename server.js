@@ -3,16 +3,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
 
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
-  }
-});
+    cors: {
+      origin: FRONTEND_ORIGIN,
+      methods: ["GET", "POST"]
+    }
+  });
 
 const ChatMessage = require('./models/ChatMessage');
 const User = require('./models/User');

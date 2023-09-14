@@ -13,7 +13,7 @@ function Login({ setIsLoginModalOpen }) {
 
   const login = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/login', { username, password });
+      const res = await axios.post('https://videochatapp-re9k-nk9uz600w-voxasaurus.vercel.app/login', { username, password });
       setMessage(res.data.message);
       
       if (res.data.message === "Logged in successfully") {

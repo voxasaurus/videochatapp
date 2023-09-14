@@ -18,7 +18,7 @@ function Chat() {
   const [colorClass, setColorClass] = useState(`color${Math.floor(Math.random() * 10)}`);
 
   useEffect(() => {
-    socket = io('http://localhost:5000');
+    socket = io('https://videochatapp-re9k-nk9uz600w-voxasaurus.vercel.app');
 
     socket.on('previous_messages', (messages) => {
       setChat(messages);
