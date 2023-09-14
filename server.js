@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
@@ -19,7 +20,8 @@ const User = require('./models/User');
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/videochatapp', {
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/videochatapp';
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
