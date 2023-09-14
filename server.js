@@ -18,7 +18,12 @@ const io = require('socket.io')(server, {
 const ChatMessage = require('./models/ChatMessage');
 const User = require('./models/User');
 
-app.use(cors());
+app.use(cors({
+  origin: FRONTEND_ORIGIN,
+  methods: ["GET", "POST"],
+  credentials: true,
+}));
+
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/videochatapp';
