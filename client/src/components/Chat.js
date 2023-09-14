@@ -64,7 +64,7 @@ function Chat() {
       setVideoID(videoID);
       socket.emit('change_video', videoID);
     } catch (e) {
-      console.error('Invalid YouTube URL');
+      console.error('Invalid YouTube URL, resubmit');
     }
   };
 
