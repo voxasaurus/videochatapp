@@ -11,7 +11,7 @@ function Register() {
 
   const register = async () => {
     try {
-      const res = await axios.post('https://videochatapp-re9k-nk9uz600w-voxasaurus.vercel.app/register', { username, password });
+      const res = await axios.post('https://videochatapp-re9k.vercel.app/register', { username, password });
       setMessage(res.data.message);
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred");  
