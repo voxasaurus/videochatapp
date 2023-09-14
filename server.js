@@ -19,7 +19,7 @@ const ChatMessage = require('./models/ChatMessage');
 const User = require('./models/User');
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://videochatapp-re9k.vercel.app/'],
+  origin: ['http://localhost:3000', 'https://videochatapp-re9k.vercel.app'],
   methods: ["GET", "POST"],
   credentials: true,
 }));
