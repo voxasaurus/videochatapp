@@ -17,18 +17,24 @@ function Login({ setIsLoginModalOpen }) {
 
   const login = async () => {
     try {
-        const res = await axios.post('https://videochatapp-re9k.vercel.app/login', { username, password });
+      const res = await axios.post(
+        'https://videoplay-chat-app-38f126c44487.herokuapp.com/login', 
+        { 
+          username: credentials.username, // updated this line
+          password: credentials.password  // and this line
+        }
+      );
       setMessage(res.data.message);
-      
+  
       if (res.data.message === "Logged in successfully") {
-        setUser({ username: credentials.username });  
-        localStorage.setItem('user', JSON.stringify({ username: credentials.username }));  
+        setUser({ username: credentials.username });
+        localStorage.setItem('user', JSON.stringify({ username: credentials.username }));
       }
     } catch (error) {
-      setMessage(error.response?.data?.message || "An error occurred");  
+      setMessage(error.response?.data?.message || "An error occurred");
     }
   };
-
+  
   const themeStyles = {
     color: theme === 'day' ? '#000' : '#c0c0c0',
     backgroundColor: theme === 'day' ? '#fff' : '#2f2f2f',
