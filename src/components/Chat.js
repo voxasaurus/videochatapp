@@ -18,22 +18,26 @@ function Chat() {
   const [colorClass, setColorClass] = useState(`color${Math.floor(Math.random() * 10)}`);
 
   useEffect(() => {
-    socket = io('https://videochatapp-re9k-nk9uz600w-voxasaurus.vercel.app');
-
+    socket = io('https://videoplay-chat-app-38f126c44487.herokuapp.com/');
+    
     socket.on('previous_messages', (messages) => {
+      console.debug('Received previous messages', messages);
       setChat(messages);
     });
-
+    
     socket.on('receive_message', (message) => {
+      console.debug('Received new message', message);
       setChat((oldChat) => [...oldChat, message]);
     });
-
+    
     socket.on('change_video', (videoID) => {
+      console.debug('Video ID changed', videoID);
       setVideoID(videoID);
       setYoutubeURL('');
     });
-
+    
     return () => {
+      console.debug('Socket disconnected');
       socket.disconnect();
     };
   }, []);
@@ -45,10 +49,16 @@ function Chat() {
   }, [chat]);
 
   const sendMessage = () => {
-    if (message && user) {
-      const newMessage = { username: user.username, message, colorClass };
-      socket.emit('send_message', newMessage);
-      setMessage('');
+    if (message) {
+      if (user) {
+        const newMessage = { username: user.username, message, colorClass };
+        socket.emit('send_message', newMessage);
+        console.debug('Message sent', newMessage);
+        setMessage('');
+      } else {
+        console.error('User not authenticated');
+        alert('You must be logged in to send a message');
+      }
     }
   };
 
@@ -61,10 +71,16 @@ function Chat() {
   const handleVideoChange = () => {
     try {
       const videoID = new URL(youtubeURL).searchParams.get('v');
-      setVideoID(videoID);
-      socket.emit('change_video', videoID);
+      if(videoID) {
+        setVideoID(videoID);
+        socket.emit('change_video', videoID);
+        console.debug('Video changed', videoID);
+      } else {
+        throw new Error('Invalid YouTube URL');
+      }
     } catch (e) {
-      console.error('Invalid YouTube URL, resubmit');
+      console.error(e.message);
+      alert('Invalid YouTube URL, please check and try again.');
     }
   };
 
@@ -84,7 +100,7 @@ function Chat() {
       <div className="chat-section">
         <div className="chat-messages" style={themeStyles}>
           {chat.map((msg, index) => (
-            <div key={index} className={`chat-message ${msg.colorClass}`}>
+            <div key={`${msg.username}-${index}`} className={`chat-message ${msg.colorClass}`}>
               <b>{msg.username}</b>
               {msg.message}
             </div>
