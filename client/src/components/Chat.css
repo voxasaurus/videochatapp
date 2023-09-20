@@ -167,3 +167,48 @@
 .color7 { background-color: rgba(255, 204, 153, 0.2); }
 .color8 { background-color: rgba(128, 128, 128, 0.2); }
 .color9 { background-color: rgba(148, 255, 181, 0.2); }
+
+/* Media Query for mobile devices */
+@media screen and (max-width: 600px) {
+    .video-player {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px;
+    }
+    
+    .youtube-container {
+      padding-top: 25%; /* Adjust the padding-top to control the height of the video */
+    }
+    
+    .chat-section {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px;
+    }
+  
+    .video-url-input {
+      flex-direction: column; /* Stack input and button vertically */
+      height: auto; /* Remove fixed height to accommodate stacked elements */
+    }
+  
+    .video-url-input input,
+    .video-url-input button {
+      width: 100%; /* Make input and button span the full width */
+      margin: 5px 0; /* Add some vertical margin */
+    }
+  
+    .chat-input-container {
+      width: 100%;
+    }
+  
+    .chat-input {
+      width: calc(100% - 50px); /* Adjust the width considering padding and button size */
+    }
+  
+    .chat-send-button {
+      position: absolute;
+      right: 10px;
+      bottom: 16px; /* Adjust the position to align it properly over the input field */
+    }
+  }
+  
