@@ -1,43 +1,48 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
-// woof
+
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
-    cors: {
-      origin: ['https://chill-chat-video-bae64c73e716.herokuapp.com'],
-      methods: ["GET", "POST", "PUT", "DELETE"],
-    }
-  });
+  cors: {
+    origin: ['https://chill-chat-video-bae64c73e716.herokuapp.com'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }
+});
 
 const ChatMessage = require('./models/ChatMessage');
 const User = require('./models/User');
 
 app.use(cors({
-    origin: ['https://chill-chat-video-bae64c73e716.herokuapp.com'],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  }));
-
-
+  origin: ['https://chill-chat-video-bae64c73e716.herokuapp.com'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
 
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/videochatapp';
 mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
 .then(() => {
-    console.log("Connected to MongoDB");
+  console.log("Connected to MongoDB");
 })
 .catch((error) => {
-    console.error("Could not connect to MongoDB", error);
+  console.error("Could not connect to MongoDB", error);
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.post('/register', async (req, res) => {
