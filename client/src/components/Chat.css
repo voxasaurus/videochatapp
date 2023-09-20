@@ -10,26 +10,33 @@
     margin: 0;
     box-sizing: border-box;
     background: linear-gradient(to right, #b3cde0, #6497b1);
-    flex-direction: column;
-}
 
-.video-player, .chat-section {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
 }
 
 .video-player {
+    width: 80%;
+    max-width: 80%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-family: 'Lato', sans-serif;
-    order: 1;
+
 }
 
 .youtube-container {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: black;
+    border: 2px solid #ccc;
     border-radius: 10px;
+    position: relative;
+    padding-top: 46.25%;
+    height: 0;
 }
 
 .youtube-container iframe {
@@ -42,17 +49,22 @@
 
 .video-url-input {
     display: flex;
-    align-items: center;
+    align-items: center; /* Align items to the center */
+    height: 60px; /* Set a fixed height */
     margin-top: 10px;
 }
 
-.video-url-input input, .video-url-input button {
+.video-url-input input {
+    flex: 1;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
 .video-url-input button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -62,11 +74,14 @@
 }
 
 .chat-section {
+    width: 20%;
+    max-width: 20%;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
     height: 100%;
     justify-content: space-between;
-    order: 2;
 }
 
 .chat-messages {
@@ -78,6 +93,7 @@
     overflow-y: auto;
     margin-bottom: 10px;
     font-family: 'Roboto', sans-serif;
+
 }
 
 .chat-message {
@@ -97,13 +113,13 @@
     border-radius: 15px;
     padding: 10px;
     border: 1px solid #ccc;
-}
+  }
 
-.chat-input-container {
+  .chat-input-container {
     position: relative;
     display: flex;
     align-items: center;
-}
+  }
 
 .chat-send-button {
     position: absolute;
@@ -115,21 +131,10 @@
     border-radius: 50%;
     cursor: pointer;
     font-size: 0.875rem;
-}
+  }
 
 .chat-send-button:hover {
     background-color: #e0e0e0;
-}
-
-/* Media Query for devices with width less than or equal to 600px */
-@media (max-width: 600px) {
-    .chat-container {
-        flex-direction: column;
-    }
-
-    .video-player, .chat-section {
-        width: 100%;
-    }
 }
 
 .day .chat-container {
