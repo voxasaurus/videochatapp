@@ -170,6 +170,11 @@
 
 /* Media Query for mobile devices */
 @media screen and (max-width: 600px) {
+    .chat-container {
+        flex-direction: column; /* Stack child elements vertically */
+        align-items: center; /* Center the elements */
+    }
+
     .video-player {
       width: 100%;
       max-width: 100%;
@@ -184,11 +189,13 @@
       width: 100%;
       max-width: 100%;
       padding: 10px;
+      order: 2; /* Make sure it appears below the video section */
     }
   
     .video-url-input {
       flex-direction: column; /* Stack input and button vertically */
       height: auto; /* Remove fixed height to accommodate stacked elements */
+      align-items: stretch; /* Allow elements to take full width */
     }
   
     .video-url-input input,
@@ -203,12 +210,12 @@
   
     .chat-input {
       width: calc(100% - 50px); /* Adjust the width considering padding and button size */
+      box-sizing: border-box; /* Include padding and border in element's total width and height */
     }
   
     .chat-send-button {
       position: absolute;
       right: 10px;
-      bottom: 16px; /* Adjust the position to align it properly over the input field */
+      bottom: 15px; /* Adjust the position to align it properly over the input field */
     }
   }
-  
