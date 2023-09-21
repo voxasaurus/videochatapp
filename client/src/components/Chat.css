@@ -216,6 +216,6 @@
     .chat-send-button {
       position: absolute;
       right: 10px;
-      bottom: 6px; /* Adjust the position to align it properly over the input field */
+      bottom: 6px; /* Adjust the position to aligns it properly over the input field */
     }
   }
